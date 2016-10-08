@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import com.Tuong.Core.Core;
+
 public class Arena {
 	/*
 	 * Arena name
@@ -32,5 +34,14 @@ public class Arena {
 	public void addPlayer(Player p){
 		PLAYER_LIST.add(p);
 		ITEM_STORE.put(p, new PlayerInfoHolder(p));
+		Core.MESSAGE_CORE.getJoinMessage(p, this);
+	}
+	public void removePlayer(Player p){
+		PLAYER_LIST.remove(p);
+		ITEM_STORE.get(p).returnItem();
+		Core.MESSAGE_CORE.getLeaveMessage(p, this);
+	}
+	public String getName(){
+		return this.NAME;
 	}
 }
